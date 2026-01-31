@@ -16,12 +16,18 @@ pipeline {
                             python3 -m venv venv
                             . venv/bin/activate
                             pip install pytest
+                            if [ -f requirements.txt ]; then
+                                pip install -r requirements.txt
+                            fi
                         '''
                     } else {
                         bat '''
                             python -m venv venv
                             call venv\\Scripts\\activate.bat
                             pip install pytest
+                            if exist requirements.txt (
+                                pip install -r requirements.txt
+                            )
                         '''
                     }
                 }
